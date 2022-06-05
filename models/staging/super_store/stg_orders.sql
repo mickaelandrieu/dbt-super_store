@@ -1,8 +1,9 @@
 SELECT
     Row_ID AS order_unique_id,
     Order_ID AS order_id,
+    PARSE_DATE('%d/%m/%Y', Order_Date) AS ordered_at,
 
-    CONCAT('CUST-', TO_BASE64(SHA256(CONCAT(Customer_Name, Region, Province)))) as customer_id,
+    TO_BASE64(SHA256(CONCAT(Customer_Name, Region, Province))) as customer_id,
     Customer_Name as customer_name,
     Province as province,
     Region as region,
