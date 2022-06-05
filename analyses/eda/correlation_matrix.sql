@@ -45,5 +45,5 @@ END LOOP;
 
 
 EXECUTE IMMEDIATE (
-        query || " order by 1;"
-    );
+    query || " order by 1;"
+);
