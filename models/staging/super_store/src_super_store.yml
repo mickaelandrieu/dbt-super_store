@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+    - name: super_store
+      description: Super Store Sales RAW connection on BigQuery
+      database: superstore-sales-351803
+      schema: raw
+      tables:
+        - name: Users
+          description: Raw Managers data (from BigQuery)
+          columns:
+            - name: Manager
+              description: Primary key for managers
+              tests:
+                - not_null
+
+        - name: Orders
+          description: Raw Orders data (from BigQuery)
+          columns:
+            - name: Row_ID
+              description: Primary key for orders
+              tests:
+                - unique
+                - not_null
+
+        - name: Returns
+          description: Raw Returns data (from BigQuery)
+          columns:
+            - name: Order_ID
+              description: Primary key for orders
+              tests:
+                - unique
+                - not_null

@@ -1,0 +1,75 @@
+version: 2
+
+models:
+    - name: fct_rfm
+      description: RFM Customer Segmentation
+      columns:
+        - name: customer_id
+          description: Customer Identifier
+          tests:
+            - unique
+            - not_null
+
+        - name: recency
+          description: Number of days since the last Customer order
+          tests:
+            - not_null
+
+        - name: frequency
+          description: Number of orders per Customer
+          tests:
+            - not_null
+
+        - name: monetary
+          description: Total Sales per Customer
+          tests:
+            - not_null
+
+        - name: variety
+          description: Total distinct Products buyed
+          tests:
+            - not_null
+
+        - name: rfm_score
+          description: RFM Score from 1 to 15, the sum of recency/frequency/monetary scores
+          tests:
+            - not_null
+            - accepted_values:
+                values:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                  - 6
+                  - 7
+                  - 8
+                  - 9
+                  - 10
+                  - 11
+                  - 12
+                  - 13
+                  - 14
+                  - 15
+
+        - name: rfm
+          description: "RFM segment as the concatenation of recency/frequency/monetary score (ex `131`)"
+          tests:
+            - not_null
+
+        - name: segment
+          description: "{{ doc('rfm_segments') }}"
+          tests:
+            - not_null
+            - accepted_values:
+                values:
+                  - 'Champions'
+                  - 'Loyal'
+                  - 'Potential Loyalists'
+                  - 'New Customers'
+                  - 'Promising'
+                  - 'Core'
+                  - 'Needs Attention'
+                  - 'Can’t Lose Them But Losing'
+                  - 'At Risk'
+                  - 'Losing But Engaged'
